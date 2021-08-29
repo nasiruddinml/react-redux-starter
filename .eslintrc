@@ -1,0 +1,88 @@
+{
+  "root": true,
+  "extends": ["prettier", "plugin:@typescript-eslint/recommended"],
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "project": "./tsconfig.json"
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".ts", ".tsx"]
+      }
+    ],
+    "react/jsx-one-expression-per-line": 0,
+    "no-param-reassign": 0,
+    "react/jsx-fragments": ["error", "syntax"],
+    "import/no-cycle": "off",
+    // Disabled danger html rule
+    "react/no-danger": "off",
+    // We will use TypeScript"s types for component props instead
+    "react/prop-types": "off",
+    // No need to import React when using Next.js
+    "react/react-in-jsx-scope": "off",
+    // This rule is not compatible with Next.js"s <Link /> components
+    "jsx-a11y/anchor-is-valid": "off",
+    // Why would you want unused vars?
+    "@typescript-eslint/no-unused-vars": ["error"],
+    // I suggest this setting for requiring return types on functions only where useful
+    "@typescript-eslint/explicit-function-return-type": [
+      "warn",
+      {
+        "allowExpressions": true,
+        "allowConciseArrowFunctionExpressionsStartingWithVoid": true
+      }
+    ],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": false,
+        "ignoreDeclarationSort": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
+        "allowSeparatedGroups": false
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.spec.ts", "**/*.spec.tsx"],
+      "env": {
+        "jest": true
+      },
+      "extends": [
+        "prettier", // Prettier plugin
+        "plugin:prettier/recommended" // Prettier recommended rules
+      ],
+      "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            // Fix [eslint] Delete 'cr' [prettier/prettier] when committing
+            "endOfLine": "auto"
+          },
+          {
+            "usePrettierrc": true
+          }
+        ] // Includes .prettierrc.js rules
+      }
+    }
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/extensions": [".ts", ".tsx", ".js", ".jsx"]
+  }
+}
